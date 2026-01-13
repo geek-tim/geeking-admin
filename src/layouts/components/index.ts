@@ -14,16 +14,16 @@ import UserCenter from './header/UserCenter.vue'
 import TabBar from './tab/TabBar.vue'
 
 export {
-  BackTop,
-  Breadcrumb,
-  CollapaseButton,
-  FullScreen,
-  Logo,
-  MobileDrawer,
-  Notices,
-  Search,
-  Setting,
-  SettingDrawer,
-  TabBar,
-  UserCenter,
+    BackTop,
+    Breadcrumb,
+    CollapaseButton,
+    FullScreen,
+    Logo,
+    MobileDrawer,
+    Notices,
+    Search,
+    Setting,
+    SettingDrawer,
+    TabBar,
+    UserCenter,
 }

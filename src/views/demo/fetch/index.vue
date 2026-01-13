@@ -18,40 +18,44 @@ import UseRequest from './components/UseRequest.vue'
 
 const msg = ref()
 function handleUpdate(data: any) {
-  msg.value = data
+    msg.value = data
 }
 </script>
 
 <template>
-  <n-card title="网络请求示例">
-    <n-split direction="horizontal" :max="0.75" :min="0.25">
-      <template #1>
-        <div class="grid grid-cols-3 gap-2 p-2">
-          <Env @update="handleUpdate" />
-          <Get @update="handleUpdate" />
-          <Post @update="handleUpdate" />
-          <FormPost @update="handleUpdate" />
-          <Delete @update="handleUpdate" />
-          <Put @update="handleUpdate" />
-          <UseRequest @update="handleUpdate" />
-          <NoToken @update="handleUpdate" />
-          <Transform @update="handleUpdate" />
-          <DownLoad @update="handleUpdate" />
-          <DownLoadWithProgress class="col-span-2" @update="handleUpdate" />
-          <RefreshToken @update="handleUpdate" />
-          <FailedRequest @update="handleUpdate" />
-          <FailedResponse @update="handleUpdate" />
-          <FailedResponseWithoutTip @update="handleUpdate" />
-          <TokenExpiration @update="handleUpdate" />
-        </div>
-      </template>
-      <template #2>
-        <pre class="bg-#eee:30">
+    <n-card title="网络请求示例">
+        <n-split direction="horizontal" :max="0.75" :min="0.25">
+            <template #1>
+                <div class="grid grid-cols-3 gap-2 p-2">
+                    <Env @update="handleUpdate" />
+                    <Get @update="handleUpdate" />
+                    <Post @update="handleUpdate" />
+                    <FormPost @update="handleUpdate" />
+                    <Delete @update="handleUpdate" />
+                    <Put @update="handleUpdate" />
+                    <UseRequest @update="handleUpdate" />
+                    <NoToken @update="handleUpdate" />
+                    <Transform @update="handleUpdate" />
+                    <DownLoad @update="handleUpdate" />
+                    <DownLoadWithProgress
+                        class="col-span-2"
+                        @update="handleUpdate"
+                    />
+                    <RefreshToken @update="handleUpdate" />
+                    <FailedRequest @update="handleUpdate" />
+                    <FailedResponse @update="handleUpdate" />
+                    <FailedResponseWithoutTip @update="handleUpdate" />
+                    <TokenExpiration @update="handleUpdate" />
+                </div>
+            </template>
+            <template #2>
+                <pre class="bg-#eee:30">
       {{ msg }}
-      </pre>
-      </template>
-    </n-split>
-  </n-card>
+      </pre
+                >
+            </template>
+        </n-split>
+    </n-card>
 </template>
 
 <style scoped></style>

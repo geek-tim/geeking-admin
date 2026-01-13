@@ -7,35 +7,33 @@ const tabStore = useTabStore()
 const { t } = useI18n()
 
 function renderDropTabsLabel(option: any) {
-  return t(`route.${String(option.name)}`, option.meta.title)
+    return t(`route.${String(option.name)}`, option.meta.title)
 }
 
 function renderDropTabsIcon(option: any) {
-  return renderIcon(option.meta.icon)!()
+    return renderIcon(option.meta.icon)!()
 }
 
 const router = useRouter()
 function handleDropTabs(key: string, option: any) {
-  router.push(option.path)
+    router.push(option.path)
 }
 </script>
 
 <template>
-  <n-dropdown
-    :options="tabStore.allTabs"
-    :render-label="renderDropTabsLabel"
-    :render-icon="renderDropTabsIcon"
-    trigger="click"
-    size="small"
-    key-field="fullPath"
-    @select="handleDropTabs"
-  >
-    <CommonWrapper>
-      <icon-park-outline-application-menu />
-    </CommonWrapper>
-  </n-dropdown>
+    <n-dropdown
+        :options="tabStore.allTabs"
+        :render-label="renderDropTabsLabel"
+        :render-icon="renderDropTabsIcon"
+        trigger="click"
+        size="small"
+        key-field="fullPath"
+        @select="handleDropTabs"
+    >
+        <CommonWrapper>
+            <icon-park-outline-application-menu />
+        </CommonWrapper>
+    </n-dropdown>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -6,13 +6,13 @@ import AppLoading from './components/common/AppLoading.vue'
 </script>
 
 <template>
-  <Suspense>
-    <!-- 异步组件 -->
-    <AppMain />
+    <Suspense>
+        <!-- 异步组件 -->
+        <AppMain />
 
-    <!-- 加载状态 -->
-    <template #fallback>
-      <AppLoading />
-    </template>
-  </Suspense>
+        <!-- 加载状态 -->
+        <template #fallback>
+            <AppLoading />
+        </template>
+    </Suspense>
 </template>

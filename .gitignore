@@ -24,6 +24,8 @@ stats.html
 *.njsproj
 *.sln
 *.sw?
+.eslintcache
+coverage
 
 components.d.ts
 auto-imports.d.ts

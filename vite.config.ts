@@ -4,33 +4,39 @@ import { createVitePlugins } from './build/plugins'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // 根据当前工作目录中的 `mode` 加载 .env 文件
-  const env = loadEnv(mode, __dirname, '') as ImportMetaEnv
+    // 根据当前工作目录中的 `mode` 加载 .env 文件
+    const env = loadEnv(mode, __dirname, '') as ImportMetaEnv
 
-  return {
-    base: env.VITE_BASE_URL,
-    plugins: createVitePlugins(env),
-    resolve: {
-      alias: {
-        '@': resolve(__dirname, 'src'),
-      },
-    },
-    server: {
-      host: '0.0.0.0',
-    },
-    build: {
-      target: 'esnext',
-      reportCompressedSize: false, // 启用/禁用 gzip 压缩大小报告
-    },
-    optimizeDeps: {
-      include: ['echarts', 'md-editor-v3', 'quill'],
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern',
+    return {
+        base: env.VITE_BASE_URL,
+        plugins: createVitePlugins(env),
+        resolve: {
+            alias: {
+                '@': resolve(__dirname, 'src'),
+            },
         },
-      },
-    },
-  }
+        server: {
+            host: '0.0.0.0',
+        },
+        build: {
+            target: 'esnext',
+            reportCompressedSize: false, // 启用/禁用 gzip 压缩大小报告
+        },
+        optimizeDeps: {
+            include: ['echarts', 'md-editor-v3', 'quill'],
+        },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    api: 'modern',
+                },
+            },
+        },
+        test: {
+            // 启用类似 Jest 的全局 API
+            globals: true,
+            // 测试环境，根据你的项目选择
+            environment: 'happy-dom',
+        },
+    }
 })

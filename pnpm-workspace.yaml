@@ -1,6 +1,6 @@
 ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
-  - simple-git-hooks
-  - vue-demi
-  - unrs-resolver
+    - '@parcel/watcher'
+    - esbuild
+    - simple-git-hooks
+    - vue-demi
+    - unrs-resolver

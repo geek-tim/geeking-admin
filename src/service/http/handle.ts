@@ -1,10 +1,7 @@
 import { fetchUpdateToken } from '@/service'
 import { useAuthStore } from '@/store'
 import { local } from '@/utils'
-import {
-  ERROR_NO_TIP_STATUS,
-  ERROR_STATUS,
-} from './config'
+import { ERROR_NO_TIP_STATUS, ERROR_STATUS } from './config'
 
 type ErrorStatus = keyof typeof ERROR_STATUS
 
@@ -14,19 +11,19 @@ type ErrorStatus = keyof typeof ERROR_STATUS
  * @return {*}
  */
 export function handleResponseError(response: Response) {
-  const error: Service.RequestError = {
-    errorType: 'Response Error',
-    code: 0,
-    message: ERROR_STATUS.default,
-    data: null,
-  }
-  const errorCode: ErrorStatus = response.status as ErrorStatus
-  const message = ERROR_STATUS[errorCode] || ERROR_STATUS.default
-  Object.assign(error, { code: errorCode, message })
+    const error: Service.RequestError = {
+        errorType: 'Response Error',
+        code: 0,
+        message: ERROR_STATUS.default,
+        data: null,
+    }
+    const errorCode: ErrorStatus = response.status as ErrorStatus
+    const message = ERROR_STATUS[errorCode] || ERROR_STATUS.default
+    Object.assign(error, { code: errorCode, message })
 
-  showError(error)
+    showError(error)
 
-  return error
+    return error
 }
 
 /**
@@ -35,18 +32,21 @@ export function handleResponseError(response: Response) {
  * @param {Service} config 后台字段配置
  * @return {*}
  */
-export function handleBusinessError(data: Record<string, any>, config: Required<Service.BackendConfig>) {
-  const { codeKey, msgKey } = config
-  const error: Service.RequestError = {
-    errorType: 'Business Error',
-    code: data[codeKey],
-    message: data[msgKey],
-    data: data.data,
-  }
+export function handleBusinessError(
+    data: Record<string, any>,
+    config: Required<Service.BackendConfig>,
+) {
+    const { codeKey, msgKey } = config
+    const error: Service.RequestError = {
+        errorType: 'Business Error',
+        code: data[codeKey],
+        message: data[msgKey],
+        data: data.data,
+    }
 
-  showError(error)
+    showError(error)
 
-  return error
+    return error
 }
 
 /**
@@ -56,12 +56,12 @@ export function handleBusinessError(data: Record<string, any>, config: Required<
  * @return {*} result
  */
 export function handleServiceResult(data: any, isSuccess: boolean = true) {
-  const result = {
-    isSuccess,
-    errorType: null,
-    ...data,
-  }
-  return result
+    const result = {
+        isSuccess,
+        errorType: null,
+        ...data,
+    }
+    return result
 }
 
 /**
@@ -69,30 +69,30 @@ export function handleServiceResult(data: any, isSuccess: boolean = true) {
  * @return {*}
  */
 export async function handleRefreshToken() {
-  const authStore = useAuthStore()
-  const isAutoRefresh = import.meta.env.VITE_AUTO_REFRESH_TOKEN === 'Y'
-  if (!isAutoRefresh) {
-    await authStore.logout()
-    return
-  }
+    const authStore = useAuthStore()
+    const isAutoRefresh = import.meta.env.VITE_AUTO_REFRESH_TOKEN === 'Y'
+    if (!isAutoRefresh) {
+        await authStore.logout()
+        return
+    }
 
-  // 刷新token
-  const { data } = await fetchUpdateToken({ refreshToken: local.get('refreshToken') })
-  if (data) {
-    local.set('accessToken', data.accessToken)
-    local.set('refreshToken', data.refreshToken)
-  }
-  else {
-    // 刷新失败，退出
-    await authStore.logout()
-  }
+    // 刷新token
+    const { data } = await fetchUpdateToken({
+        refreshToken: local.get('refreshToken'),
+    })
+    if (data) {
+        local.set('accessToken', data.accessToken)
+        local.set('refreshToken', data.refreshToken)
+    } else {
+        // 刷新失败，退出
+        await authStore.logout()
+    }
 }
 
 export function showError(error: Service.RequestError) {
-  // 如果error不需要提示,则跳过
-  const code = Number(error.code)
-  if (ERROR_NO_TIP_STATUS.includes(code))
-    return
+    // 如果error不需要提示,则跳过
+    const code = Number(error.code)
+    if (ERROR_NO_TIP_STATUS.includes(code)) return
 
-  window.$message.error(error.message)
+    window.$message.error(error.message)
 }

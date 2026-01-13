@@ -1,121 +1,106 @@
-<div align="center">
-<img src="https://s2.loli.net/2023/10/27/WzQ4JLNV5epKh6X.png" style="width:150px"/>
-    <h1>Nova Admin</h1>
-</div>
+## 🚀 简介
 
-<div align="center">
-    <img src="https://img.shields.io/github/license/chansee97/nova-admin"/>
-    <img src="https://badgen.net/github/stars/chansee97/nova-admin?icon=github"/>
-    <img src="https://gitee.com/chansee97/nova-admin/badge/star.svg"/>
-    <img src="https://img.shields.io/github/forks/chansee97/nova-admin"/>
-</div>
+`geeking Admin` 是一款 完全免费 且可商用的中后台解决方案，基于 🌟 `Vue3.x` 🌟、🚀 `Vite` 🚀、✨ [Naive UI](https://www.naiveui.com/) ✨ 和 🎉 `TypeScript` 🎉。
+它融合了最新的前端技术栈，提炼了典型的业务模型和页面，包括二次封装组件、动态菜单、权限校验等功能，助力快速搭建企业级中后台项目
 
-<div align='center'>
+## 🌈 特性
 
-  English |  [中文](./README.zh-CN.md)
-</div>
+🌱 使用 Vue3/Vite2，开箱即用的前端框架
+🎨 规范的代码结构，良好的代码注释，便于阅读与二次开发
+📦 二次封装的实用高扩展性组件
+🎨 响应式、多主题、多配置，快速集成，开箱即用
+🚀 强大的鉴权系统，支持 三种鉴权模式，满足多样业务需求
+🌐 持续更新的实用性页面模板和交互设计，简化页面构建
 
-## Introduction
+## 📚 文档
 
-[Nova-admin](https://github.com/chansee97/nova-admin) is a clean and concise back-end management template based on Vue3, Vite5, Typescript, and Naive UI. It implements complete functionality in a simple way, while also considering code standards, readability, and avoiding excessive encapsulation to facilitate secondary development.
+## 🛠 准备
 
-- [Nova-Admin preview](https://nova-admin.pages.dev/)
-- [Nova-Admin docs](https://nova-admin-docs.pages.dev/)
+- [node](http://nodejs.org/) 和 [git](https://git-scm.com/) -项目开发环境
+- [Vite](https://vitejs.dev/) - 熟悉 vite 特性
+- [Vue3](https://v3.vuejs.org/) - 熟悉 Vue 基础语法
+- [TypeScript](https://www.typescriptlang.org/) - 熟悉`TypeScript`基本语法
+- [Es6+](http://es6.ruanyifeng.com/) - 熟悉 es6 基本语法
+- [Vue-Router-Next](https://next.router.vuejs.org/) - 熟悉 vue-router 基本使用
+- [NaiveUi](https://www.naiveui.com/) - ui 基本使用
+- [Mock.js](https://github.com/nuysoft/Mock) - mockjs 基本语法
 
-## Features
+## 🏗️ 使用
 
-- Developed based on the latest technology stack including Vue3, Vite6, TypeScript, NaiveUI, Unocss, etc.
-- Based on [alova](https://alova.js.org/) encapsulation and configuration, providing unified response handling and multi-scenario capabilities.
-- Comprehensive front-end and back-end permission management solution.
-- Supports local static routes and dynamically generated routes from the back end, with easy route configuration.
-- Secondary encapsulation of commonly used components to meet basic work requirements.
-- Dark theme adaptation, maintaining the Naive style for interface aesthetics.
-- Only performs eslint validation during submission without excessive restrictions for simpler development.
-- Flexible and configurable interface layout based on [pro-naive-ui](https://github.com/Zheng-Changfu/pro-naive-ui)
-- Multilanguage (i18n) support.
-
-## Project preview
-
-![preview-1.png](https://s2.loli.net/2024/03/31/UZoajnEekMX9cLi.png)
-![preview-2.jpg](https://s2.loli.net/2024/03/31/8VwMSyXWtO6avKg.jpg)
-![preview-5.png](https://s2.loli.net/2024/03/31/TCtE2ZBU7MJ6HrY.png)
-![preview-6.png](https://s2.loli.net/2024/03/31/YM1OrxZCimzLcd6.png)
-![preview-4.png](https://s2.loli.net/2024/03/31/hgYHKjACqs7rcPV.png)
-![preview-3.png](https://s2.loli.net/2024/03/31/TuYajAH9LWsMPf5.png)
-
-## Repo
-
-- [Gitee](https://gitee.com/chansee97/nova-admin)
-- [Github](https://github.com/chansee97/nova-admin)
-
-## Interface document
-
-This project uses ApiFox for interface mock, check the online documentation for more interface details
-[online aipfox docs](https://nova-admin.apifox.cn)
-
-## Install and use
-
-The local development environment is recommended to use pnpm 10.x, Node.js version 21.x.
-
-It is recommended to directly download the compressed package from [Releases](https://github.com/chansee97/nova-admin/releases)
+- 获取项目代码
 
 ```bash
-# install dependencies
-pnpm i
+git clone https://github.com/geek-tim/geeking-admin.git
+```
 
-# Run
-pnpm dev
+- 安装依赖
 
-# Build product
+```bash
+cd geeking-admin
+
+pnpm install
+
+```
+
+- 运行
+
+```bash
+pnpm run dev
+```
+
+- 单元测试
+
+```bash
+pnpm run test:unit
+```
+
+- 代码格式检查
+
+```bash
+pnpm run lint
+```
+
+- 提交代码(规范化)
+
+```bash
+pnpm run commit
+```
+
+- 打包
+
+```bash
 pnpm build
-
 ```
 
-You can deploy **nova-admin** in a production environment using docker-compose.
-```bash
-# Build product
-docker compose -f docker-compose.product.yml up --build -d
-```
-> The nginx.conf provided is for reference only. You can adjust it according to your own needs.
+## 📜 更新日志
 
-## Related projects
+[CHANGELOG](./CHANGELOG.md)
 
-- [Nova-admin-nest](https://github.com/chansee97/nova-admin-nest) (under development) Nova-Admin supporting background project based on TS, NestJs, typeorm
+## 🤝 如何贡献
 
-## Learn to communicate
+非常欢迎你的加入！[提一个 Issue](https://github.com/geek-tim/geeking-admin/issues) 或者提交一个 `Pull Request`
 
-Nova-Admin is a completely open-source and free project. It is still being optimized and iterated. It is designed to help developers more conveniently develop medium and large management systems. If you have any questions, please ask questions in the QQ exchange group.
+**Pull Request:**
 
-| Q-Group | wechat-Group |
-| :--: |:--: |
-| <img src="https://cdn.jsdelivr.net/gh/chansee97/static/nova-admin/q-group.png" width=170> |<img src="https://cdn.jsdelivr.net/gh/chansee97/static/wechat.png" width=170>|
+1. Fork 代码!
+2. 创建自己的分支: `git checkout -b feat/xxxx`
+3. 提交你的修改: `git commit -am 'feat(function): add xxxxx'`
+4. 推送您的分支: `git push origin feat/xxxx`
+5. 提交`pull request`
 
-> Please indicate the purpose of adding WeChat.
+## 📋 Git 贡献提交规范
 
-## Contribution
-
-If you find any issues or have suggestions for improvement, please create an [issue](nova-admin/issues/new) or submit a PR. We welcome your contributions!
-
-## Support
-
-If you feel that this project is helpful for your work or study, please help me order a ✨ Star, which will be a great encouragement and support for me, or you can buy me a cup of coffee below
-
-| wechat | alipay |
-| :--: |:--: |
-| <img src="https://cdn.jsdelivr.net/gh/chansee97/static/sponsor-wechat.png" width=170> | <img src="https://cdn.jsdelivr.net/gh/chansee97/static/sponsor-alipay.png" width=170>|
-
-## Contributors
-
-Thanks for all their contributions!
-
-<a href="https://github.com/chansee97/nova-admin/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=chansee97/nova-admin" alt="contributors" />
-</a>
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=chansee97/nova-admin&type=Date)](https://star-history.com/#chansee97/nova-admin&Date)
-
-## License
-
-[MIT](LICENSE)
+- 参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) 规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+    - `feat` 增加新功能
+    - `fix` 修复问题/BUG
+    - `style` 代码风格相关无影响运行结果的
+    - `perf` 优化/性能提升
+    - `refactor` 重构
+    - `revert` 撤销修改
+    - `test` 测试相关
+    - `docs` 文档/注释
+    - `chore` 依赖更新/脚手架配置修改等
+    - `workflow` 工作流改进
+    - `ci` 持续集成
+    - `types` 类型定义文件更改
+    - `wip` 开发中
