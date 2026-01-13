@@ -1,19 +1,17 @@
-import { request } from '../http'
+import { request } from '../http/index'
 
 // 获取所有路由信息
 export function fetchAllRoutes() {
-    return request.Get<Service.ResponseResult<AppRoute.RowRoute[]>>(
-        '/getUserRoutes',
-    )
+    return request.get<Service.ResType<AppRoute.RowRoute[]>>('/getUserRoutes')
 }
 
 // 获取所有用户信息
 export function fetchUserPage() {
-    return request.Get<Service.ResponseResult<Entity.User[]>>('/userPage')
+    return request.get<Service.ResType<Entity.User[]>>('/userPage')
 }
 // 获取所有角色列表
 export function fetchRoleList() {
-    return request.Get<Service.ResponseResult<Entity.Role[]>>('/role/list')
+    // return request.get<Service.ResType<Entity.Role[]>>('/role/list')
 }
 
 /**
@@ -24,7 +22,7 @@ export function fetchRoleList() {
  */
 export function fetchDictList(code?: string) {
     const params = { code }
-    return request.Get<Service.ResponseResult<Entity.Dict[]>>('/dict/list', {
+    return request.get<Service.ResType<Entity.Dict[]>>('/dict/list', {
         params,
     })
 }

@@ -3,15 +3,18 @@ import { http, HttpResponse } from 'msw'
 export const auths = [
     // 用户认证接口
     http.post('/api/auth/login', async ({ request }) => {
+        // console.log('login', await request.json())
         const { username, password } = await request.json()
-        if (username === 'admin' && password === '123456') {
+        if (username === 'super' && password === '123456') {
             return HttpResponse.json({
-                code: 0,
+                code: 200,
                 data: {
                     token: 'mock-jwt-token',
                     refreshToken: 'mock-jwt-token',
                     tokenType: 'Bearer',
                     expiresIn: 3600,
+                    role: ['super'],
+                    user: { id: 1, username: 'super' },
                     // user: { id: 1, username: 'admin', role: 'admin' },
                     // id: number
                     // /** 用户角色类型 */

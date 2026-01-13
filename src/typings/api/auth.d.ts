@@ -34,7 +34,7 @@ namespace Api {
             refreshToken: string
             tokenType: string
             expiresIn: number
-            // userInfo: IUserInfo;
+            userInfo: Api.Login.Info
         }
         /**
          * 刷新Token接口响应

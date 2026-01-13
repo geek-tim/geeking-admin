@@ -1,23 +1,13 @@
 /** 请求的相关类型 */
 declare namespace Service {
-    import type { Method } from 'alova'
-
-    interface AlovaConfig {
-        baseURL: string
-        timeout?: number
-        beforeRequest?: (method: Method<globalThis.Ref<unknown>>) => void
-    }
-
-    /** 后端接口返回的数据结构配置 */
-    interface BackendConfig {
-        /** 表示后端请求状态码的属性字段 */
-        codeKey?: string
-        /** 表示后端请求数据的属性字段 */
-        dataKey?: string
-        /** 表示后端消息的属性字段 */
-        msgKey?: string
-        /** 后端业务上定义的成功请求的状态 */
-        successCode?: number | string
+    type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
+    interface Http {
+        get<T>(url: string, params?: unknown): Promise<ResType<T>>
+        post<T>(url: string, params?: unknown): Promise<ResType<T>>
+        put<T>(url: string, params?: unknown): Promise<ResType<T>>
+        delete<T>(url: string, params?: unknown): Promise<ResType<T>>
+        upload<T>(url: string, params: unknown): Promise<ResType<T>>
+        download(url: string): void
     }
 
     type ResType<T = any> = {

@@ -1,33 +1,32 @@
-import { request } from '../http'
+import { request } from '../http/index'
 
 interface Ilogin {
-    userName: string
+    username: string
     password: string
 }
 
 export function fetchLogin(data: Ilogin) {
-    const methodInstance = request.Post<Service.ResType<Api.Login.Info>>(
-        '/login',
-        data,
-    )
-    methodInstance.meta = {
-        authRole: null,
-    }
+    const methodInstance = request.post<
+        Service.ResType<Api.Auth.LoginResponse> & {
+            roles: string[]
+            userInfo: Api.Login.Info
+        }
+    >('/auth/login', data)
     return methodInstance
 }
 export function fetchUpdateToken(data: any) {
-    const method = request.Post<Service.ResType<Api.Login.Info>>(
-        '/updateToken',
+    const method = request.post<Service.ResType<Api.Login.Info>>(
+        '/auth/updateToken',
         data,
     )
-    method.meta = {
-        authRole: 'refreshToken',
-    }
     return method
 }
 
 export function fetchUserRoutes(params: { id: number }) {
-    return request.Get<Service.ResType<AppRoute.RowRoute[]>>('/getUserRoutes', {
-        params,
-    })
+    return request.get<Service.ResType<AppRoute.RowRoute[]>>(
+        '/auth/getUserRoutes',
+        {
+            params,
+        },
+    )
 }

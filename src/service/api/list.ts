@@ -1,5 +1,5 @@
-import { request } from '../http'
+import { request } from '../http/index'
 
 export function fetchUserList() {
-    return request.Get('/userList')
+    return request.get('/userList')
 }

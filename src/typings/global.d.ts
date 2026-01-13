@@ -41,6 +41,7 @@ declare namespace Storage {
         userInfo: Api.Login.Info
         /* 存储访问token */
         accessToken: string
+        tokenType: string
         /* 存储刷新token */
         refreshToken: string
         /* 存储登录账号 */

@@ -7,12 +7,14 @@ import { useTabStore } from './tab'
 interface AuthStatus {
     userInfo: Api.Login.Info | null
     token: string
+    tokenType: string
 }
 export const useAuthStore = defineStore('auth-store', {
     state: (): AuthStatus => {
         return {
             userInfo: local.get('userInfo'),
             token: local.get('accessToken') || '',
+            tokenType: local.get('tokenType') || '',
         }
     },
     getters: {
@@ -52,12 +54,13 @@ export const useAuthStore = defineStore('auth-store', {
         },
 
         /* 用户登录 */
-        async login(userName: string, password: string) {
+        async login(username: string, password: string) {
             try {
                 const { code, data } = await fetchLogin({
-                    userName,
+                    username,
                     password,
                 })
+                console.log(data)
                 if (code != 200) return
 
                 // 处理登录信息
@@ -68,13 +71,14 @@ export const useAuthStore = defineStore('auth-store', {
         },
 
         /* 处理登录返回的数据 */
-        async handleLoginInfo(data: Api.Login.Info) {
+        async handleLoginInfo(data: Api.Auth.LoginResponse) {
             // 将token和userInfo保存下来
-            local.set('userInfo', data)
-            local.set('accessToken', data.accessToken)
+            local.set('userInfo', data.userInfo)
+            local.set('accessToken', data.token)
+            local.set('tokenType', data.tokenType)
             local.set('refreshToken', data.refreshToken)
-            this.token = data.accessToken
-            this.userInfo = data
+            this.token = data.token
+            this.userInfo = data.userInfo
 
             // 添加路由和菜单
             const routeStore = useRouteStore()

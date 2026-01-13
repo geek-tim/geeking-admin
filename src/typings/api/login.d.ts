@@ -6,12 +6,12 @@ namespace Api {
         interface Info extends Entity.User {
             /** 用户id */
             id: number
-            /** 用户角色类型 */
-            role: Entity.RoleType[]
-            /** 访问token */
-            accessToken: string
-            /** 访问token */
-            refreshToken: string
+            // /** 用户角色类型 */
+            // role: Entity.RoleType[]
+            // /** 访问token */
+            // accessToken: string
+            // /** 访问token */
+            // refreshToken: string
         }
     }
 }
