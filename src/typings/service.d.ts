@@ -34,18 +34,16 @@ declare namespace Service {
     interface PaginationParams {
         page?: number
         pageSize?: number
-        sort?: string
-        order?: 'asc' | 'desc'
+        sortField?: string
+        sortOrder?: 'asc' | 'desc'
     }
 
     // 分页响应
-    interface PaginatedResponse<T> {
-        data: T[]
-        pagination: {
-            page: number
-            pageSize: number
-            total: number
-            totalPages: number
-        }
+    interface PaginationResponse<T> {
+        list: T[]
+        total: number
+        page: number
+        pageSize: number
+        totalPages: number
     }
 }

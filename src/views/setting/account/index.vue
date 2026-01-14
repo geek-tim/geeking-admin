@@ -3,7 +3,7 @@ import type { DataTableColumns, FormInst } from 'naive-ui'
 import CopyText from '@/components/custom/CopyText.vue'
 import { Gender } from '@/constants'
 import { useBoolean } from '@/hooks'
-import { fetchUserPage } from '@/service'
+import { getUserList } from '@/service'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag } from 'naive-ui'
 import TableModal from './components/TableModal.vue'
 
@@ -18,6 +18,11 @@ const initialModel = {
     condition_2: '',
 }
 const model = ref({ ...initialModel })
+const pagination = ref<Service.PaginationParams>({
+    page: 1,
+    pageSize: 10,
+})
+
 function handleResetSearch() {
     model.value = { ...initialModel }
 }
@@ -119,17 +124,12 @@ function handleUpdateDisabled(value: 0 | 1, id: number) {
     if (index > -1) listData.value[index].status = value
 }
 
-async function getUserList() {
-    startLoading()
-    await fetchUserPage().then((res: any) => {
+onMounted(() => {
+    getUserList(pagination.value).then(async (res) => {
+        startLoading()
         listData.value = res.data.list
-        count.value = res.data.count
         endLoading()
     })
-}
-
-onMounted(() => {
-    getUserList()
 })
 
 function changePage(page: number, size: number) {

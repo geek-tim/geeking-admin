@@ -3,7 +3,7 @@ import type { DataTableColumns, FormInst, NDataTable } from 'naive-ui'
 import { Gender } from '@/constants'
 import { useBoolean } from '@/hooks'
 import { useTableDrag } from '@/hooks/useTableDrag'
-import { fetchUserPage } from '@/service'
+import { getUserList } from '@/service'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag } from 'naive-ui'
 
 const {
@@ -19,7 +19,10 @@ const initialModel = {
     condition_4: '',
 }
 const model = ref({ ...initialModel })
-
+const pagination = ref<Service.PaginationParams>({
+    page: 1,
+    pageSize: 10,
+})
 const formRef = ref<FormInst | null>()
 function sendMail(id?: number) {
     window.$message.success(`删除用户id:${id}`)
@@ -113,15 +116,12 @@ useTableDrag({
 })
 
 onMounted(() => {
-    getUserList()
-})
-async function getUserList() {
-    startLoading()
-    await fetchUserPage().then((res: any) => {
+    getUserList(pagination.value).then(async (res) => {
+        startLoading()
         listData.value = res.data.list
         endLoading()
     })
-}
+})
 function changePage(page: number, size: number) {
     window.$message.success(`分页器:${page},${size}`)
 }

@@ -27,7 +27,7 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
     async (response: AxiosResponse) => {
-        if (response.data.code === 111) {
+        if (response.data.code === -1) {
             sessionStorage.setItem('token', '')
             // token过期操作
         }

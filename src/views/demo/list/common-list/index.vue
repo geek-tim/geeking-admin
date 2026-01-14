@@ -2,10 +2,9 @@
 import type { DataTableColumns, FormInst } from 'naive-ui'
 import { Gender } from '@/constants'
 import { useBoolean } from '@/hooks'
-import { fetchUserPage } from '@/service'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag } from 'naive-ui'
 import TableModal from './components/TableModal.vue'
-
+import { getUserList } from '@/service'
 const {
     bool: loading,
     setTrue: startLoading,
@@ -20,6 +19,10 @@ const initialModel = {
     condition_4: '',
 }
 const model = ref({ ...initialModel })
+const pagination = ref<Service.PaginationParams>({
+    page: 1,
+    pageSize: 10,
+})
 
 const formRef = ref<FormInst | null>()
 function sendMail(id?: number) {
@@ -105,15 +108,13 @@ function handleUpdateDisabled(value: 0 | 1, id: number) {
 }
 
 onMounted(() => {
-    getUserList()
-})
-async function getUserList() {
-    startLoading()
-    await fetchUserPage().then((res: any) => {
+    getUserList(pagination.value).then(async (res) => {
+        startLoading()
         listData.value = res.data.list
         endLoading()
     })
-}
+})
+
 function changePage(page: number, size: number) {
     window.$message.success(`分页器:${page},${size}`)
 }
