@@ -9,9 +9,10 @@ export function login(params: Api.Auth.loginParam) {
 }
 
 export function getAuthMe() {
-    return request.post<{ roles: Api.Role.base[]; userInfo: Api.User.Profile }>(
+    return request.get<{ roles: Api.Role.base[]; userInfo: Api.User.Profile }>(
         '/auth/me',
     )
+    // GET /api/v1/auth/me?fields=id,username,roles
 }
 
 /**

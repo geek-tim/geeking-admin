@@ -2,6 +2,7 @@ namespace Api {
     namespace Role {
         interface base {
             id: number
+            code: string
             name: string
             description: string
             permissions?: number[]

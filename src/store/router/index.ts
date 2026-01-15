@@ -40,15 +40,15 @@ export const useRouteStore = defineStore('route-store', {
             if (import.meta.env.VITE_ROUTE_LOAD_MODE === 'dynamic') {
                 try {
                     // Get user's route
-                    const result = await fetchUserRoutes({
+                    const { data } = await fetchUserRoutes({
                         id: 1,
                     })
 
-                    if (!result.isSuccess || !result.data) {
-                        throw new Error('Failed to fetch user routes')
-                    }
+                    // if (!result.isSuccess || !result.data) {
+                    //     throw new Error('Failed to fetch user routes')
+                    // }
 
-                    return result.data
+                    return data
                 } catch (error) {
                     console.error('Failed to initialize route info:', error)
                     throw error

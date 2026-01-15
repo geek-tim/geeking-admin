@@ -5,7 +5,7 @@ import { useRouteStore } from './router'
 import { useTabStore } from './tab'
 
 interface AuthState {
-    userInfo: Api.User.Profile | null
+    userInfo: (Api.User.Profile & { roles: string[] }) | null
     token: string
     tokenType: string
 }
@@ -77,8 +77,13 @@ export const useAuthStore = defineStore('auth-store', {
             local.set('refreshToken', loginResponse.refreshToken)
             this.token = loginResponse.token
 
-            const { code, data } = await getAuthMe()
-            this.userInfo = data.userInfo
+            const { data } = await getAuthMe()
+            this.userInfo = {
+                ...data.userInfo,
+                roles: data.roles.map((item) => {
+                    return item.code
+                }),
+            }
             local.set('userInfo', data.userInfo)
 
             // 添加路由和菜单
