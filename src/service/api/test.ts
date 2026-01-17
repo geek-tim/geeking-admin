@@ -83,6 +83,6 @@ export function expiredTokenRequest() {
     return request.get('/expiredToken')
 }
 /* 测试token刷新接口 */
-export function refreshToken() {
-    return request.get('/updataToken')
-}
+// export function refreshToken() {
+//     return request.get('/updataToken')
+// }

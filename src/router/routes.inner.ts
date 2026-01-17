@@ -36,6 +36,36 @@ export const routes: RouteRecordRaw[] = [
             withoutTab: true,
         },
     },
+    // {
+    //     path: '/error/403',
+    //     name: '403',
+    //     component: () => import('@/views/build-in/exception/403.vue'),
+    //     meta: {
+    //         title: '无权访问该页面',
+    //         icon: 'icon-park-outline:ghost',
+    //         withoutTab: true,
+    //     },
+    // },
+    // {
+    //     path: '/error/404',
+    //     name: '404',
+    //     component: () => import('@/views/build-in/exception/404.vue'),
+    //     meta: {
+    //         title: '找不到页面',
+    //         icon: 'icon-park-outline:ghost',
+    //         withoutTab: true,
+    //     },
+    // },
+    // {
+    //     path: '/error/500',
+    //     name: '500',
+    //     component: () => import('@/views/build-in/exception/500.vue'),
+    //     meta: {
+    //         title: '服务器异常',
+    //         icon: 'icon-park-outline:ghost',
+    //         withoutTab: true,
+    //     },
+    // },
     {
         path: '/:pathMatch(.*)*',
         component: () => import('@/views/build-in/not-found/index.vue'),

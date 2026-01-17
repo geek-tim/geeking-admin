@@ -1,9 +1,9 @@
 import { request } from '../http/index'
 
 // 获取所有路由信息
-export function fetchAllRoutes() {
-    return request.get<AppRoute.RowRoute[]>('/getUserRoutes')
-}
+// export function fetchAllRoutes() {
+//     return request.get<AppRoute.RowRoute[]>('/getUserRoutes')
+// }
 
 // 获取所有角色列表
 export function fetchRoleList() {

@@ -49,10 +49,6 @@ export function assignRoles(userId: number, roleIds: number[]) {
     return request.post('/users/' + userId + '/roles', roleIds)
 }
 
-export function getUserRoutes(userId: number) {
-    return request.get('/users/' + userId + '/routes')
-}
-
-export function fetchUserRoutes(params: { id: number }) {
-    return request.get<AppRoute.RowRoute[]>('/getUserRoutes', { params })
+export function getUserRoutes() {
+    return request.get<Service.PaginationResponse<Entity.Menu>>('/users/menus')
 }

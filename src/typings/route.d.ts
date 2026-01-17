@@ -1,5 +1,4 @@
 declare namespace AppRoute {
-    type MenuType = 'dir' | 'page'
     /** 单个路由所携带的meta标识 */
     interface RouteMeta {
         /* 页面标题，通常必选。 */
@@ -25,7 +24,7 @@ declare namespace AppRoute {
         /** 当前路由是否会被固定在Tab中,用于一些常驻页面 */
         pinTab?: boolean
         /** 当前路由在左侧菜单是目录还是页面,不设置默认为page */
-        menuType?: MenuType
+        menuType?: Entity.MenuType
     }
 
     type MetaKeys = keyof RouteMeta

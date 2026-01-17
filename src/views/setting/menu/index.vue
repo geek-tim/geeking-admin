@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import type { DataTableColumns } from 'naive-ui'
 import { useBoolean } from '@/hooks'
-import { fetchAllRoutes } from '@/service'
+import { getMenuList } from '@/service'
 import { arrayToTree, createIcon } from '@/utils'
 import { NButton, NPopconfirm, NSpace, NTag } from 'naive-ui'
 import { renderProCopyableText } from 'pro-naive-ui'
@@ -74,7 +74,7 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
         width: '6em',
         render: (row) => {
             const menuType = row.menuType || 'page'
-            const menuTagType: Record<AppRoute.MenuType, NaiveUI.ThemeColor> = {
+            const menuTagType: Record<Entity.MenuType, NaiveUI.ThemeColor> = {
                 dir: 'primary',
                 page: 'warning',
             }
@@ -128,8 +128,8 @@ onMounted(() => {
 })
 async function getAllRoutes() {
     startLoading()
-    const { data } = await fetchAllRoutes()
-    tableData.value = arrayToTree(data)
+    const { data } = await getMenuList()
+    tableData.value = arrayToTree(data.list)
     endLoading()
 }
 

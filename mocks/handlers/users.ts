@@ -1,4 +1,5 @@
 import { request, RequestOptions } from '../utils'
+import { allmenus } from './menus'
 
 export const users = [
     request.get('/api/users/profile', {
@@ -126,5 +127,9 @@ export const users = [
                 remark: '把党周备铁青即造路美战志工更人方家直。系京果气马府必号发料花克她清向如。养什起克国西王龙于究八价美完议。半住马快农分划十变定传记记果求用。大政压太始统计且离资共决则子容。热装求加政你通万严受较北任。品门与劳入南制眼务程等感两民。',
             },
         ],
+    }),
+    request.get('/api/users/menus', {
+        total: 50,
+        list: allmenus,
     }),
 ]
