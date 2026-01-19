@@ -1,13 +1,30 @@
 /** 请求的相关类型 */
 declare namespace Service {
     type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
+
     interface Http {
-        get<T>(url: string, params?: unknown): Promise<ResType<T>>
-        post<T>(url: string, params?: unknown): Promise<ResType<T>>
-        put<T>(url: string, params?: unknown): Promise<ResType<T>>
-        delete<T>(url: string, params?: unknown): Promise<ResType<T>>
-        upload<T>(url: string, params: unknown): Promise<ResType<T>>
-        download(url: string): void
+        // get<T>(url: string, config?: RequestConfig): Promise<ResType<T>>
+        // post<T>(
+        //     url: string,
+        //     params?: unknown,
+        //     config?: InternalAxiosRequestConfig,
+        // ): Promise<ResType<T>>
+        // put<T>(
+        //     url: string,
+        //     params?: unknown,
+        //     config?: InternalAxiosRequestConfig,
+        // ): Promise<ResType<T>>
+        // delete<T>(
+        //     url: string,
+        //     params?: unknown,
+        //     config?: InternalAxiosRequestConfig,
+        // ): Promise<ResType<T>>
+        // upload<T>(
+        //     url: string,
+        //     params: unknown,
+        //     config?: InternalAxiosRequestConfig,
+        // ): Promise<ResType<T>>
+        // download(url: string): void
     }
 
     type ResType<T = any> = {

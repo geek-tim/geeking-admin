@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { fetchGet } from '@/service'
 
-import { useRequest } from 'alova/client'
+import { useRequest } from 'axios-vue'
 
 const emit = defineEmits<{
     update: [data: any] // 具名元组语法

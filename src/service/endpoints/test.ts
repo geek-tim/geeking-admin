@@ -1,34 +1,34 @@
-import { request } from '../http/index'
+import service, { request } from '../http/index'
 
 /* get方法测试 */
 export function fetchGet(params?: any) {
-    return request.get('/getAPI', { params })
+    return request.get('/tests', { params })
 }
 
 /* post方法测试 */
 export function fetchPost(data: any) {
-    return request.post('/postAPI', data)
+    return request.post('/tests', data)
 }
 /* formPost方法测试 */
 export function fetchFormPost(data: any) {
-    const methodInstance = request.post('/postFormAPI', data)
-    // methodInstance.meta = {
-    //     isFormPost: true,
-    // }
-    return methodInstance
+    return request.post('/tests/postFormAPI', data)
 }
+
 /* delete方法测试 */
-export function fetchDelete() {
-    return request.delete('/deleteAPI')
+export function fetchDelete(id: number) {
+    return request.delete(`/tests/${id}`)
 }
 /* put方法测试 */
-export function fetchPut(data: any) {
-    return request.put('/putAPI', data)
+export function fetchPut(id: number, data: any) {
+    return request.put(`/tests/${id}`, data)
 }
 /* 不携带token的接口 */
 export function withoutToken() {
-    const methodInstance = request.get('/getAPI')
-    return methodInstance
+    return service
+        .get('/tests/withoutToken', { skipAuth: true } as any)
+        .then((res) => {
+            return res.data
+        }) // 跳过认证
 }
 /* 接口数据转换 */
 export function dictData() {

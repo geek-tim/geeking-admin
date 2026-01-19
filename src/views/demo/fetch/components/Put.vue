@@ -6,7 +6,7 @@ const emit = defineEmits<{
 }>()
 
 async function put() {
-    const res = await fetchPut({ a: 112211, b: false })
+    const res = await fetchPut(1, { a: 112211, b: false })
     emit('update', res)
 }
 </script>

@@ -1,125 +1,169 @@
 import axios from 'axios'
-import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig, AxiosInstance } from 'axios'
+import { setupInterceptors } from '../interceptors'
 
-import NProgress from 'nprogress'
-import { useAuthStore } from '@/store/auth'
+// 创建实例
+const baseURL = '/api/'
+const timeout = 10000
+function createAxiosInstance(): AxiosInstance {
+    const instance = axios.create({
+        baseURL,
+        timeout,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        // 跨域请求凭证
+        // withCredentials: true,
+        // // 请求参数序列化
+        // paramsSerializer: {
+        //     serialize: (params) => {
+        //         return Object.entries(params)
+        //             .map(([key, value]) => {
+        //                 if (value === null || value === undefined) return ''
+        //                 if (Array.isArray(value)) {
+        //                     return value
+        //                         .map(
+        //                             (v) =>
+        //                                 `${encodeURIComponent(key)}=${encodeURIComponent(v)}`,
+        //                         )
+        //                         .join('&')
+        //                 }
+        //                 return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        //             })
+        //             .filter(Boolean)
+        //             .join('&')
+        //     },
+        // },
+    })
 
-const service = axios.create()
-// 设置请求头和请求路径
-service.defaults.baseURL = '/api/'
-service.defaults.timeout = 10000
-service.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
+    // 安装拦截器
+    setupInterceptors(instance)
 
-// Request interceptors
-service.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-        const authStore = useAuthStore()
-        if (authStore.token) {
-            config.headers.Authorization = `${authStore.tokenType} ${authStore.token}`
-        }
-        return config
-    },
-    (error: any) => {
-        Promise.reject(error)
-    },
-)
+    return instance
+}
+const httpClient = createAxiosInstance()
 
-// Response interceptors
-service.interceptors.response.use(
-    async (response: AxiosResponse) => {
-        if (response.data.code === -1) {
-            sessionStorage.setItem('token', '')
-            // token过期操作
-        }
-        // do something
-        return response
-    },
-    (error: any) => {
-        // do something
-        return Promise.reject(error)
-    },
-)
+export default httpClient
 
-// export default service
-export const request: Service.Http = {
-    get(url, params) {
+export interface RequestConfig extends AxiosRequestConfig {
+    // 自定义配置
+    showError?: boolean // 是否显示错误提示
+    showLoading?: boolean // 是否显示加载状态
+    retryCount?: number // 重试次数
+    cache?: boolean // 是否启用缓存
+    cacheKey?: string // 缓存key
+    cacheTime?: number // 缓存时间(ms)
+}
+
+export const request = {
+    get: <T = any>(
+        url: string,
+        config?: RequestConfig,
+    ): Promise<Service.ResType<T>> => {
         return new Promise((resolve, reject) => {
-            NProgress.start()
-            service
-                .get(url, { params })
+            httpClient
+                .get(url, config)
                 .then((res) => {
-                    NProgress.done()
                     resolve(res.data)
                 })
                 .catch((err) => {
-                    NProgress.done()
                     reject(err.data)
                 })
         })
     },
-    post(url, params) {
+    post: <T = any>(
+        url: string,
+        data?: any,
+        config?: RequestConfig,
+    ): Promise<Service.ResType<T>> => {
         return new Promise((resolve, reject) => {
-            NProgress.start()
-            service
-                .post(url, JSON.stringify(params))
+            httpClient
+                .post(url, data, config)
                 .then((res) => {
-                    NProgress.done()
                     resolve(res.data)
                 })
                 .catch((err) => {
-                    NProgress.done()
                     reject(err.data)
                 })
         })
     },
-    put(url, params) {
+
+    put: <T = any>(
+        url: string,
+        data?: any,
+        config?: RequestConfig,
+    ): Promise<Service.ResType<T>> => {
         return new Promise((resolve, reject) => {
-            NProgress.start()
-            service
-                .put(url, JSON.stringify(params))
+            httpClient
+                .put(url, data, config)
                 .then((res) => {
-                    NProgress.done()
                     resolve(res.data)
                 })
                 .catch((err) => {
-                    NProgress.done()
                     reject(err.data)
                 })
         })
     },
-    delete(url, params) {
+    delete: <T = any>(
+        url: string,
+        config?: RequestConfig,
+    ): Promise<Service.ResType<T>> => {
         return new Promise((resolve, reject) => {
-            NProgress.start()
-            service
-                .delete(url, { params })
+            httpClient
+                .delete(url, config)
                 .then((res) => {
-                    NProgress.done()
                     resolve(res.data)
                 })
                 .catch((err) => {
-                    NProgress.done()
+                    reject(err)
+                })
+        })
+    },
+
+    patch: <T = any>(
+        url: string,
+        data?: any,
+        config?: RequestConfig,
+    ): Promise<Service.ResType<T>> => {
+        return new Promise((resolve, reject) => {
+            httpClient
+                .delete(url, config)
+                .then((res) => {
+                    resolve(res.data)
+                })
+                .catch((err) => {
                     reject(err.data)
                 })
         })
     },
-    upload(url, file) {
+    // httpClient.patch<Service.ResType<T>>(url, data, config),
+
+    // 文件上传专用
+    upload: <T = any>(
+        url: string,
+        formData: FormData,
+        config?: RequestConfig,
+    ): Promise<Service.ResType<T>> => {
         return new Promise((resolve, reject) => {
-            NProgress.start()
-            service
-                .post(url, file, {
-                    headers: { 'Content-Type': 'multipart/form-data' },
+            httpClient
+                .post<Service.ResType<T>>(url, formData, {
+                    ...config,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        ...config?.headers,
+                    },
                 })
                 .then((res) => {
-                    NProgress.done()
                     resolve(res.data)
                 })
                 .catch((err) => {
-                    NProgress.done()
                     reject(err.data)
                 })
         })
     },
-    download(url) {
+
+    download(url: string) {
         const iframe = document.createElement('iframe')
         iframe.style.display = 'none'
         iframe.src = url

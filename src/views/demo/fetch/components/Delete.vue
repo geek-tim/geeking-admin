@@ -6,7 +6,7 @@ const emit = defineEmits<{
 }>()
 
 async function handleDelete() {
-    const res = await fetchDelete()
+    const res = await fetchDelete(1)
     emit('update', res)
 }
 </script>

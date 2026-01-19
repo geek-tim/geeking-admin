@@ -3,7 +3,7 @@ import type { DataTableColumns, FormInst, NDataTable } from 'naive-ui'
 import { Gender } from '@/constants'
 import { useBoolean } from '@/hooks'
 import { useTableDrag } from '@/hooks/useTableDrag'
-import { getUserList } from '@/service'
+import { userApi } from '@/service'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag } from 'naive-ui'
 
 const {
@@ -116,7 +116,7 @@ useTableDrag({
 })
 
 onMounted(() => {
-    getUserList(pagination.value).then(async (res) => {
+    userApi.getUsers(pagination.value).then(async (res) => {
         startLoading()
         listData.value = res.data.list
         endLoading()
@@ -166,7 +166,7 @@ function handleResetSearch() {
                         />
                     </n-form-item>
                     <n-flex class="ml-auto">
-                        <NButton type="primary" @click="getUserList">
+                        <NButton type="primary" @click="userApi.getUsers">
                             <template #icon>
                                 <icon-park-outline-search />
                             </template>

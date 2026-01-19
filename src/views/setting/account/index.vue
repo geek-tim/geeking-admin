@@ -3,7 +3,7 @@ import type { DataTableColumns, FormInst } from 'naive-ui'
 import CopyText from '@/components/custom/CopyText.vue'
 import { Gender } from '@/constants'
 import { useBoolean } from '@/hooks'
-import { getUserList } from '@/service'
+import { userApi } from '@/service'
 import { NButton, NPopconfirm, NSpace, NSwitch, NTag } from 'naive-ui'
 import TableModal from './components/TableModal.vue'
 
@@ -125,7 +125,7 @@ function handleUpdateDisabled(value: 0 | 1, id: number) {
 }
 
 onMounted(() => {
-    getUserList(pagination.value).then(async (res) => {
+    userApi.getUsers(pagination.value).then(async (res) => {
         startLoading()
         listData.value = res.data.list
         endLoading()

@@ -30,12 +30,12 @@ function handleUpdate(data: any) {
                     <Env @update="handleUpdate" />
                     <Get @update="handleUpdate" />
                     <Post @update="handleUpdate" />
+                    <NoToken @update="handleUpdate" />
                     <FormPost @update="handleUpdate" />
                     <Delete @update="handleUpdate" />
                     <Put @update="handleUpdate" />
-                    <UseRequest @update="handleUpdate" />
-                    <NoToken @update="handleUpdate" />
-                    <Transform @update="handleUpdate" />
+                    <!-- <UseRequest @update="handleUpdate" /> -->
+                    <!-- <Transform @update="handleUpdate" />
                     <DownLoad @update="handleUpdate" />
                     <DownLoadWithProgress
                         class="col-span-2"
@@ -45,7 +45,7 @@ function handleUpdate(data: any) {
                     <FailedRequest @update="handleUpdate" />
                     <FailedResponse @update="handleUpdate" />
                     <FailedResponseWithoutTip @update="handleUpdate" />
-                    <TokenExpiration @update="handleUpdate" />
+                    <TokenExpiration @update="handleUpdate" /> -->
                 </div>
             </template>
             <template #2>
